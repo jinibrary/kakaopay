@@ -15,6 +15,6 @@ Spring Boot - maven / mySQL - resource 하위에 DDL 포함
 
     예제 > INSERT 시 RG_REQUEST_DATE(등록요청일자)는 등록하고자 하는 DATE
   
-    SELECT & UPDAE 시 RG_REQUEST_DATE(등록요청일자)는 (받기 요청시간 - 10min)으로, DB적재되어 있는 RG_REQUEST_DATE(등록요청일자)과 비교하는 용도로 사용
+    SELECT & UPDAE 시 RG_REQUEST_DATE(등록요청일자)는 (받기 요청시간 - 10min)으로, DB적재되어 있는 RG_REQUEST_DATE(등록요청일자)과 비교하는 용도
         
     조회 기능에서는 (받기 요청시간 - 10min)이 아닌 (받기 요청시간 - 7day)으로 사용
