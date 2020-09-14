@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakaopay.spreadapp.dao.SpreadRequestIzDAO">
+  	
+	<update 
+		id				=	"insertSpreadRequestIz"
+		parameterType	=	"com.kakaopay.spreadapp.vo.SpreadRequestIzVO">
+		INSERT INTO
+			TB_SPREAD_REQUEST_IZ
+		VALUES(
+			 #{token}
+			,#{room}
+			,#{reqSeq}
+			,#{user}
+			,#{rgRequestDate}
+			,#{rgMoney}
+			,#{rgUser}
+			,#{rgServeDate})
+		;
+	</update>
+
+	<select 
+		id				=	"selectAfterRgDateSpreadRequestIz"
+		parameterType	=	"com.kakaopay.spreadapp.vo.SpreadRequestIzVO"
+		resultType		=	"com.kakaopay.spreadapp.vo.SpreadRequestIzVO">
+		SELECT 
+			*
+		FROM 
+			TB_SPREAD_REQUEST_IZ
+		WHERE
+				TOKEN = #{token}
+			AND ROOM = #{room}
+			AND USER = #{user}
+			AND RG_REQUEST_DATE >= #{rgRequestDate}
+		;
+	</select>	
+
+	<select 
+		id				=	"selectRowSpreadRequestIz"
+		parameterType	=	"com.kakaopay.spreadapp.vo.SpreadRequestIzVO"
+		resultType 		=	"com.kakaopay.spreadapp.vo.SpreadRequestIzVO">
+		SELECT 
+			*
+		FROM
+			TB_SPREAD_REQUEST_IZ
+		WHERE
+				TOKEN = #{token}
+			AND ROOM = #{room}
+			AND RG_USER = 0 
+			AND USER = #{user}
+			AND RG_REQUEST_DATE >= #{rgRequestDate}
+		LIMIT 1
+		;
+	</select>
+	
+	<update 
+		id				=	"updateSpreadRequestIz"
+		parameterType	=	"com.kakaopay.spreadapp.vo.SpreadRequestIzVO">
+		UPDATE
+			TB_SPREAD_REQUEST_IZ
+		SET
+			 RG_USER = #{rgUser}
+			,RG_SERVE_DATE = #{rgServeDate}
+		WHERE
+				TOKEN = #{token}
+			AND ROOM = #{room}
+			AND REQ_SEQ = #{reqSeq}
+			AND USER = #{user}
+			AND RG_REQUEST_DATE >= #{rgRequestDate}
+		;
+	</update>
+	
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakaopay.spreadapp.dao.SpreadRequestBasDAO">
+  	
+	<update 
+		id				=	"insertSpreadRequestBas"
+		parameterType	=	"com.kakaopay.spreadapp.vo.SpreadRequestBasVO">
+		INSERT INTO 
+			TB_SPREAD_REQUEST_BAS
+		VALUES(
+			 #{token}
+			,#{room}
+			,#{rgRequestDate}
+			,#{user}
+			,#{rgTotalMoney}
+			,#{rgUserCount})
+		;
+	</update>
+	
+	<select 
+		id				=	"selectAfterRgDateSpreadRequestBas"
+		parameterType	=	"com.kakaopay.spreadapp.vo.SpreadRequestBasVO"
+		resultType 		=	"com.kakaopay.spreadapp.vo.SpreadRequestBasVO">
+		SELECT 
+			*
+		FROM
+			TB_SPREAD_REQUEST_BAS
+		WHERE
+				TOKEN = #{token}
+			AND ROOM = #{room}
+			<if test="user != 0">
+       		AND USER = #{user}
+    		</if>
+			AND RG_REQUEST_DATE >= #{rgRequestDate}
+		;
+	</select>
+</mapper>
